@@ -17,8 +17,10 @@ namespace Server
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
 
+
+			var Conn = builder.Configuration.GetConnectionString("PSQL");
 			builder.Services.AddDbContext<DatabaseContext>(opt => {
-				opt.UseNpgsql(@"Host=hansken.db.elephantsql.com;Username=bdtfzrna;Password=lyDXtGkj1nxguy3l1UOYY8g7DGP7TWO5;Database=bdtfzrna");
+				opt.UseNpgsql(Conn);
 			});	
 
 			var app = builder.Build();
