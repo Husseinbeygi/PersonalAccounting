@@ -20,5 +20,6 @@ public interface IRepository<TEntity, TKey> where TEntity : IEntity<TKey>
 
 	Task<IEnumerable<TEntity>> GetSomeAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default(CancellationToken));
 
-	Task<TEntity> GetByIdAsync(Guid id, CancellationToken cancellationToken = default(CancellationToken));
+	Task<TEntity> GetByIdAsync(TKey id, CancellationToken cancellationToken = default(CancellationToken));
+	Task SaveChangesAsync();
 }
