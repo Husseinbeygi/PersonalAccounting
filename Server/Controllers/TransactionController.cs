@@ -15,7 +15,7 @@ namespace Server.Controllers
 	, TransactionCreateViewModel
 	, TransactionUpdateViewModel>
 	{
-		public TransactionController(ILogger<Transaction> logger, IRepository<Transaction, int> repository) : base(logger, repository)
+		public TransactionController(ILogger<Transaction> logger, ITransactionRepository repository) : base(logger, repository)
 		{
 		}
 	}

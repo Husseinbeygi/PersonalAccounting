@@ -15,7 +15,7 @@ namespace Server.Controllers
 		, CategoryCreateViewModel
 		, CategoryUpdateViewModel>
 	{
-		public CategoryController(ILogger<Category> logger, IRepository<Category, int> repository) : base(logger, repository)
+		public CategoryController(ILogger<Category> logger, ICategoryRepository repository) : base(logger, repository)
 		{
 		}
 	}

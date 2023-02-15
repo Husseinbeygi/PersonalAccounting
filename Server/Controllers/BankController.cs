@@ -16,7 +16,7 @@ public class BankController : BaseController
 	, BankUpdateViewModel>
 
 {
-	public BankController(ILogger<Bank> logger, IRepository<Bank, int> repository) : base(logger, repository)
+	public BankController(ILogger<Bank> logger, IBankRepository repository) : base(logger, repository)
 	{
 	}
 }

@@ -18,7 +18,7 @@ public class EventController : BaseController
 {
 	public EventController
 	(ILogger<EventController> logger,
-	IRepository<Event, int> repository) : base(logger, repository)
+	IEventRepository repository) : base(logger, repository)
 	{
 	}
 }

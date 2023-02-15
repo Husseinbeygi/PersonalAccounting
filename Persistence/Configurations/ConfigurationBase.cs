@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 
 namespace Persistence.Configurations;
 
-public class ConfigurationBase<TEntity,Tkey> : IEntityTypeConfiguration<TEntity> where TEntity : class, IEntity<Tkey>
+public class ConfigurationBase<TEntity,TKey> : IEntityTypeConfiguration<TEntity> where TEntity : class, IEntity<TKey>
 {
 	public virtual void Configure(EntityTypeBuilder<TEntity> builder)
 	{

@@ -16,7 +16,7 @@ public class AccountSideController : BaseController
 	, AccountSideUpdateViewModel>
 
 {
-	public AccountSideController(ILogger<AccountSide> logger, IRepository<AccountSide, int> repository) : base(logger, repository)
+	public AccountSideController(ILogger<AccountSide> logger, IAccountSideRepository repository) : base(logger, repository)
 	{
 	}
 }

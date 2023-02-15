@@ -1,5 +1,4 @@
 ﻿using Domain.Projects;
-using Domain.SeedWork;
 using Microsoft.AspNetCore.Mvc;
 using Server.Infrastructure;
 using ViewModels.Projects;
@@ -15,7 +14,7 @@ public class ProjectController : BaseController
 		, ProjectCreateViewModel
 		, ProjectUpdateViewModel>
 {
-	public ProjectController(ILogger<Project> logger, IRepository<Project, int> repository) : base(logger, repository)
+	public ProjectController(ILogger<Project> logger, IProjectRepository repository) : base(logger, repository)
 	{
 	}
 }
