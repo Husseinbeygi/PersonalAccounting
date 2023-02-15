@@ -1,14 +1,15 @@
-﻿using Domain.Exceptions;
+﻿using Domain.Banks;
+using Domain.Exceptions;
 using Domain.SeedWork;
 
-namespace Domain;
+namespace Domain.BankAccounts;
 
 public class BankAccount : IEntity<int>
 , IEntityHasIsActive
 , IsEntityHasVersionControl
 {
 	public BankAccount(string name, string? accountNumber,
-	string? sheba, string? cardNumber, int bankId, Bank bank,
+	string? sheba, string? cardNumber, int bankId,
 	decimal firstAmount, int ordering, bool isActive)
 	{
 		Name = name;
@@ -16,7 +17,6 @@ public class BankAccount : IEntity<int>
 		Sheba = sheba;
 		CardNumber = cardNumber;
 		BankId = bankId;
-		Bank = bank;
 		FirstAmount = firstAmount;
 		Ordering = ordering;
 		IsActive = isActive;
