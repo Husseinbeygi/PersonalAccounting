@@ -22,7 +22,7 @@ public class BaseController<TEntity, TKey, TViewModel, TCreateModel, TUpdateMode
 	{
 		var entities = (await Repository.GetAllAsync()).ToList();
 
-		var mappedEntities = entities.Adapt<TViewModel>();
+		var mappedEntities = entities.Adapt<List<TViewModel>>();
 
 		var result = mappedEntities.ToResult();
 
