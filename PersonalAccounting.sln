@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Resources", "Resources\Reso
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{81FC66EB-EA8E-432B-8C5A-215B007E6D09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerUI", "ServerUI\ServerUI.csproj", "{CFB5D3A7-C115-495A-AFA7-848666AB98E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerUI", "ServerUI\ServerUI.csproj", "{CFB5D3A7-C115-495A-AFA7-848666AB98E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

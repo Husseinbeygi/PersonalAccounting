@@ -2,10 +2,10 @@
 
 <div class="page">
     <div class="sidebar">
-        <NavMenu />
+        <NavMenu collapseNavMenuEvent="collapseNav" />
     </div>
-
-    <main style="">
+    
+    <main hidden="@isNavCollapsed">
         <div class="top-row px-5 auth">
             <LoginDisplay />
             <a href="https://docs.microsoft.com/aspnet/" target="_blank">درباره</a>
@@ -15,4 +15,13 @@
             @Body
         </article>
     </main>
+
 </div>
+
+@code {
+    private bool isNavCollapsed = false;
+    public void collapseNav(bool value)
+    {
+        isNavCollapsed = !value;
+    }
+}
