@@ -144,6 +144,9 @@
   <data name="Edit" xml:space="preserve">
     <value>ویرایش</value>
   </data>
+  <data name="ExportExcel" xml:space="preserve">
+    <value>خروجی اکسل</value>
+  </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>فراموشی گذرواژه</value>
   </data>
@@ -168,8 +171,14 @@
   <data name="No" xml:space="preserve">
     <value>خیر</value>
   </data>
+  <data name="OK" xml:space="preserve">
+    <value>تایید</value>
+  </data>
   <data name="Previous" xml:space="preserve">
     <value>قبلی</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>بازیابی</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>ثبت‌نام</value>

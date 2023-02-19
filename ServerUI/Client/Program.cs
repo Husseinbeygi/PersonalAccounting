@@ -1,3 +1,4 @@
+using Crm.FrontEnd.Blazor.Infrastructure;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using ServerUI;
@@ -24,8 +25,16 @@ namespace ServerUI
 				builder.Configuration.Bind("Local", options.ProviderOptions);
 			});
 
+			Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fa-IR");
+			Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("fa-IR");
 
-			await builder.Build().RunAsync();
+			services.AddLocalization();
+
+            var host = builder.Build();
+
+            await Culture.SetUserCulture(host);
+
+            await host.RunAsync();
 		}
 	}
 }

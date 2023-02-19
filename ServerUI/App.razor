@@ -1,4 +1,7 @@
-﻿<CascadingAuthenticationState>
+﻿@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<CascadingAuthenticationState>
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
@@ -25,3 +28,6 @@
 </CascadingAuthenticationState>
 
 <AntContainer />
+
+@code {
+}

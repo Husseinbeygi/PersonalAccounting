@@ -1,4 +1,6 @@
-﻿<div class="top-row ps-3 navbar">
+﻿@inject NavigationManager navigationManager
+
+<div class="top-row ps-3 navbar">
 	<div class="container-fluid">
 		<button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
 			<Icon Type="menu" Theme="outline" />
@@ -39,10 +41,10 @@
 			<div class="py-3 mx-auto">
 				<div class="row  py-1">
 					<div class="col-6">
-						<Button Style="height:100px;width:100px" Type="@ButtonType.Dashed">افزودن هزینه</Button>
+						<Button Style="height:100px;width:100px" Type="@ButtonType.Dashed">@(string.Concat(Resources.DataDictionary.Add," ", Resources.DataDictionary.Cost))</Button>
 					</div>
 					<div class="col-6">
-						<Button Style="height:100px;width:100px" Type="@ButtonType.Dashed">افزودن درآمد</Button>
+							<Button Style="height:100px;width:100px" OnClick='(() => NavigateTo("income"))' Type="@ButtonType.Dashed">@(string.Concat(Resources.DataDictionary.Add, " ", Resources.DataDictionary.Income))</Button>
 					</div>
 				</div>
 				<div class="row  py-1">
@@ -81,24 +83,6 @@
 
 			</div>
 		</div>
-
-
-		@*        <div class="nav-item px-3">
-		<NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-		<span class="oi oi-home" aria-hidden="true"></span> Home
-		</NavLink>
-		</div>
-		<div class="nav-item px-3">
-		<NavLink class="nav-link" href="counter">
-		<span class="oi oi-plus" aria-hidden="true"></span> Counter
-		</NavLink>
-		</div>
-		<div class="nav-item px-3">
-		<NavLink class="nav-link" href="fetchdata">
-		<span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-		</NavLink>
-		</div>
-		*@
 	</nav>
 </div>
 
@@ -114,5 +98,10 @@
 	{
 		collapseNavMenu = !collapseNavMenu;
 		await collapseNavMenuEvent.InvokeAsync(collapseNavMenu);
+	}
+
+	private void NavigateTo(string path,bool forceLoad = false)
+	{
+		navigationManager.NavigateTo(path, forceLoad);
 	}
 }

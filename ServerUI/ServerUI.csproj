@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+	<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="7.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +22,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Shared\Index\Services\" />
+    <Folder Include="Pages\Income\Components\" />
+    <Folder Include="Pages\Income\Services\" />
+    <Folder Include="Pages\Index\Services\" />
+    <Folder Include="Shared\Components\Grid\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Resources\Resources.csproj" />
+    <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

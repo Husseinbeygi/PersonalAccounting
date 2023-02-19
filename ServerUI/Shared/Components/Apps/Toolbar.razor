@@ -1,0 +1,37 @@
+﻿<Tooltip Title="@(Resources.ButtonCaptions.ExportExcel)">
+	<Button Shape="@ButtonShape.Circle" Icon="@IconType.Outline.Export" OnClick="OnExportClick" />
+</Tooltip>
+
+<Tooltip Title="@(Resources.ButtonCaptions.Delete)">
+	<Button Disabled="!canDelete" Shape="@ButtonShape.Circle" Icon="@IconType.Outline.Delete" OnClick="OnDeleteClick" />
+</Tooltip>
+
+<Tooltip Title="@(Resources.ButtonCaptions.Create)">
+	<Button Shape="@ButtonShape.Circle" Icon="@IconType.Outline.Plus" OnClick="OnAddClick" />
+</Tooltip>
+
+<Tooltip Title="@(Resources.ButtonCaptions.Refresh)">
+	<Button Shape="@ButtonShape.Circle" Icon="@IconType.Outline.Reload" OnClick="OnRefreshClick" />
+</Tooltip>
+
+@code {
+
+	[Parameter]
+	public EventCallback OnAddClick { get; set; }
+
+	[Parameter]
+	public EventCallback OnDeleteClick { get; set; }
+
+	[Parameter]
+	public EventCallback OnEditClick { get; set; }
+
+	[Parameter]
+	public EventCallback OnRefreshClick { get; set; }
+
+	[Parameter]
+	public EventCallback OnExportClick { get; set; }
+
+	[Parameter]
+	public bool canDelete { get; set; }
+
+}
