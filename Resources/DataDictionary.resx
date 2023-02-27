@@ -276,6 +276,9 @@
   <data name="Environmental" xml:space="preserve">
     <value>Environmental</value>
   </data>
+  <data name="Event" xml:space="preserve">
+    <value>Event</value>
+  </data>
   <data name="Export" xml:space="preserve">
     <value>Export</value>
   </data>
@@ -527,6 +530,15 @@
   </data>
   <data name="Transaction" xml:space="preserve">
     <value>Transaction</value>
+  </data>
+  <data name="TransactionDate" xml:space="preserve">
+    <value>Transaction Date</value>
+  </data>
+  <data name="TransactionDateTime" xml:space="preserve">
+    <value>Transaction DateTime</value>
+  </data>
+  <data name="TransactionTime" xml:space="preserve">
+    <value>Transaction Time</value>
   </data>
   <data name="Transportation" xml:space="preserve">
     <value>Transportation</value>

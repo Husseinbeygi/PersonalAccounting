@@ -1,0 +1,44 @@
+﻿<Modal Title="@(Title)"
+       Visible="@(_visible)"
+       OnOk="@(OnSubmit)"
+       OnCancel="@(HandleCancel)">
+
+       <div>
+        @(ChildContent)
+       </div>
+
+</Modal>
+
+
+@code {
+    bool _visible = false;
+    bool _loading = false;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public EventCallback OnSubmit { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    public void Open()
+    {
+        _visible = true;
+    }
+
+
+    private async Task HandleOk(MouseEventArgs e)
+    {
+        _loading = true;
+        await Task.Delay(3000);
+        _visible = false;
+        _loading = false;
+    }
+
+    private void HandleCancel(MouseEventArgs e)
+    {
+        _visible = false;
+    }
+}

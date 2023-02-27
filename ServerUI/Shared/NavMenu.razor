@@ -41,7 +41,7 @@
 			<div class="py-3 mx-auto">
 				<div class="row  py-1">
 					<div class="col-6">
-						<Button Style="height:100px;width:100px" Type="@ButtonType.Dashed">@(string.Concat(Resources.DataDictionary.Add," ", Resources.DataDictionary.Cost))</Button>
+						<Button Style="height:100px;width:100px" OnClick='(() => NavigateTo("cost"))' Type="@ButtonType.Dashed">@(string.Concat(Resources.DataDictionary.Add," ", Resources.DataDictionary.Cost))</Button>
 					</div>
 					<div class="col-6">
 							<Button Style="height:100px;width:100px" OnClick='(() => NavigateTo("income"))' Type="@ButtonType.Dashed">@(string.Concat(Resources.DataDictionary.Add, " ", Resources.DataDictionary.Income))</Button>

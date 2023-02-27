@@ -76,7 +76,7 @@ IEntity<int>
 
 	public void SetUpdateDateTime()
 	{
-		UpdateDateTime = DateTime.UtcNow;
+		UpdateDateTime = DateTime.Now;
 	}
 
 	public static Transaction Insert(int debtor, int creditor,

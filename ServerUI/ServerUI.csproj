@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="AntDesign" Version="0.14.2" />
     <PackageReference Include="AntDesign.Charts" Version="0.3.0" />
+    <PackageReference Include="Blazor.PersianDatePicker" Version="3.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="7.0.0" />
@@ -22,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Income\Components\" />
+    <Folder Include="Pages\Cost\Services\" />
     <Folder Include="Pages\Income\Services\" />
     <Folder Include="Pages\Index\Services\" />
     <Folder Include="Shared\Components\Grid\" />

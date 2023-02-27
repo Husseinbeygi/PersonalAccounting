@@ -1,0 +1,54 @@
+﻿@using ServerUI.Shared.Components
+@using ViewModels.Transactions;
+
+<LoadingComponent Enabled="_isloading">
+	<Table TItem="TransactionViewModel"
+		   DataSource="Transactions"
+		   Total="Transactions.Count()"
+			   Responsive
+		   @bind-SelectedRows="SelectedRows">
+
+		<Selection Align="ColumnAlign.Center" Fixed="_checkboxFix" Key="@(context.Id.ToString())" />
+		@*		<ActionColumn Title="#">
+		<Space>
+		<SpaceItem>
+		<Button OnClick="(() => GotoEdit(context.Id))"
+		Shape="@ButtonShape.Circle"
+		Type="@ButtonType.Text"
+		Style="background-color:#fafafafa">
+		@(context.Code)
+		</Button>
+		</SpaceItem>
+		</Space>
+		</ActionColumn>
+		*@
+		<PropertyColumn Title="@(string.Concat(Resources.DataDictionary.Transaction," ",Resources.DataDictionary.DateTime))" Align="columnAlign" Property="c=>c.TransactionDateTime" Sortable Filterable />
+		<PropertyColumn Title="@(Resources.DataDictionary.AccountSide)" Align="columnAlign" Property="c=>c.AccountSideName" Sortable Filterable />
+		<PropertyColumn Title="@(Resources.DataDictionary.BankAccount)" Align="columnAlign" Property="c=>c.BankAccountName" Sortable Filterable />
+		<PropertyColumn Title="@(Resources.DataDictionary.Amount)" Align="columnAlign" Property="c=>c.Amount" Sortable Filterable />
+		<PropertyColumn Title="@(Resources.DataDictionary.Category)" Align="columnAlign" Property="c=>c.CategoryName" Sortable Filterable />
+		<PropertyColumn Title="@(Resources.DataDictionary.Project)" Align="columnAlign" Property="c=>c.ProjectName" Sortable Filterable />
+
+	</Table>
+</LoadingComponent>
+
+
+@code {
+	bool _isloading = false;
+	List<TransactionViewModel> Transactions = new();
+	IEnumerable<TransactionViewModel> selectedRows;
+	public IEnumerable<TransactionViewModel> SelectedRows
+	{
+		get
+		{
+			return selectedRows;
+		}
+		set
+		{
+			selectedRows = value;
+			//Index.CheckforSelection();
+		}
+	}
+	ColumnAlign columnAlign = ColumnAlign.Right;
+
+}

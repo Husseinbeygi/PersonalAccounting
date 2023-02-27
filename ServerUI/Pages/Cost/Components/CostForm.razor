@@ -1,0 +1,110 @@
+﻿@using System.ComponentModel.DataAnnotations;
+@using System.Text.Json;
+@using System.ComponentModel
+@using ViewModels.Transactions;
+
+<Form @ref="form"
+	  Model="@model"
+	  OnFinish="OnFinish"
+	  OnFinishFailed="OnFinishFailed"
+	  Class="p-4">
+	<div class="row rowDateTime">
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.TransactionDate)">
+				<InputPersianDatePicker Id="myInputDatePicker"
+										@bind-Value="_transactionShamsiDate"
+										DateFormat="DateFormat.yyyy_slash_MM_slash_dd"
+										Style="width:100%"
+										CssClass="form-control" />
+			</FormItem>
+		</div>
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.TransactionTime)">
+				<TimePicker TValue="DateTime?" Style="width:100%" />
+			</FormItem>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.Amount)" Class="p-2">
+				<Input Class="form-control" @bind-Value="@context.Amount" />
+			</FormItem>
+		</div>
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.Category)" Class="p-2">
+				<AutoComplete Options="@options">
+					<AutoCompleteInput TValue="string" Placeholder="input here" />
+				</AutoComplete>
+			</FormItem>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.AccountSide)" Class="p-2">
+				<AutoComplete Options="@options">
+					<AutoCompleteInput TValue="string" Placeholder="input here" />
+				</AutoComplete>
+			</FormItem>
+		</div>
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.BankAccount)" Class="p-2">
+				<AutoComplete Options="@options">
+					<AutoCompleteInput TValue="string" Placeholder="input here" />
+				</AutoComplete>
+			</FormItem>
+		</div>
+	</div>
+
+	<Divider />
+
+
+	<div class="row">
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.Project)" Class="p-2">
+				<AutoComplete Options="@options">
+					<AutoCompleteInput TValue="string" Placeholder="input here" />
+				</AutoComplete>
+			</FormItem>
+		</div>
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.Event)" Class="p-2">
+				<AutoComplete Options="@options">
+					<AutoCompleteInput TValue="string" Placeholder="input here" />
+				</AutoComplete>
+			</FormItem>
+		</div>
+	</div>
+
+</Form>
+@code
+{
+	private Form<TransactionCreateViewModel> form;
+	private TransactionCreateViewModel model = new();
+
+	private string _transactionShamsiDate;
+
+	public void Submit()
+	{
+		if (form.Validate())
+		{
+			form.Submit();
+		}
+	}
+
+	List<string> options = new List<string>(){
+		"Beijing","Shanghai","Guangzhou","Shenzhen","Chongqing","Wuhan"
+	};
+
+	private void OnFinish(EditContext editContext)
+	{
+		Console.WriteLine($"Success:{JsonSerializer.Serialize(model)}");
+	}
+
+	private void OnFinishFailed(EditContext editContext)
+	{
+		Console.WriteLine($"Failed:{JsonSerializer.Serialize(model)}");
+	}
+}

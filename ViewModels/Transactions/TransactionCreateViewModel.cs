@@ -1,26 +1,38 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Resources;
 
 namespace ViewModels.Transactions;
 
 public record TransactionCreateViewModel 
 {
-	public int Id { get; private set; }
-	public int AccountSideId { get; private set; }
-	public int Version { get; private set; }
-	public int Ordering { get; private set; }
-	public int InsertedBy { get; private set; }
-	public int UpdatedBy { get; private set; }
-	public int CategoryId { get; private set; }
-	public int BankAccountId { get; private set; }
-	public int CurrencyId { get; private set; }
-	public bool IsUpdatable { get; private set; }
-	public bool IsUndeletable { get; private set; }
-	public string? Description { get; private set; }
-	public decimal Amount { get; private set; }
-	public decimal ExchangeRate { get; private set; }
-	public bool IsForeignCurrency { get; private set; }
-	public DateTime TransactionDateTime { get; private set; }
-	public int ProjectId { get; private set; }
-	public int EventId { get; private set; }
+    public TransactionCreateViewModel()
+    {
+        TransactionDateTime = DateTime.Now;
+    }
+
+    public int AccountSideId { get; set; }
+	public int Version { get; set; }
+	public int Ordering { get; set; }
+	public int InsertedBy { get; set; }
+	public int UpdatedBy { get; set; }
+	public int CategoryId { get; set; }
+	public int BankAccountId { get; set; }
+	public int CurrencyId { get; set; }
+	public bool IsUpdatable { get; set; }
+	public bool IsUndeletable { get; set; }
+	public string? Description { get; set; }
+
+	[Display(ResourceType = typeof(DataDictionary), 
+	Name = nameof(DataDictionary.Amount))]
+	public decimal Amount { get; set; }
+	public decimal ExchangeRate { get; set; }
+	public bool IsForeignCurrency { get; set; }
+
+    [Display(ResourceType = typeof(DataDictionary),
+		Name = nameof(DataDictionary.TransactionDateTime))]
+    public DateTime TransactionDateTime { get; set; }
+	public int ProjectId { get; set; }
+	public int EventId { get; set; }
 
 }

@@ -5,6 +5,12 @@ html, body {
     background-color : #F6F6F6
 }
 
+
+.datePickerStyle {
+    font-family: "Vazirmatn UI FD NL";
+
+}
+
 h1:focus {
     outline: none;
 }

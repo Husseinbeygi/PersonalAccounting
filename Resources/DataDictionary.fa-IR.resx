@@ -282,6 +282,9 @@
   <data name="Environmental" xml:space="preserve">
     <value>محیطی</value>
   </data>
+  <data name="Event" xml:space="preserve">
+    <value>رویداد</value>
+  </data>
   <data name="Export" xml:space="preserve">
     <value>خروجی</value>
   </data>
@@ -530,6 +533,15 @@
   </data>
   <data name="Transaction" xml:space="preserve">
     <value>تراکنش</value>
+  </data>
+  <data name="TransactionDate" xml:space="preserve">
+    <value>تاریخ تراکنش</value>
+  </data>
+  <data name="TransactionDateTime" xml:space="preserve">
+    <value>تاریخ تراکنش</value>
+  </data>
+  <data name="TransactionTime" xml:space="preserve">
+    <value>ساعت تراکنش</value>
   </data>
   <data name="Transportation" xml:space="preserve">
     <value>حمل و نقل</value>
