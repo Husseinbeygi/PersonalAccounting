@@ -1,0 +1,43 @@
+﻿@page "/bankaccount"
+@using ServerUI.Shared.Components.Apps
+@using ServerUI.Pages.BankAccount.Components
+<h3>BankAccount</h3>
+<div class="py-2" dir="ltr">
+	<Toolbar OnAddClick="OpenForm"/>
+</div>
+<div class="py-2">
+	<BankAccountGrid />
+</div>
+
+
+<Modal Title="Test"
+	   Visible="@(_visible)" 
+	   OnOk="@(OnSubmit)"
+	   OnCancel="@(OnCancel)"
+	   Width="800">
+
+
+	<BankAccountForm @ref="_costForm" />
+
+</Modal>
+
+@code {
+	BankAccountForm _costForm = new();
+	bool _visible = false;
+
+	void OpenForm()
+	{
+		_visible = true;
+	}
+	void OnSubmit()
+	{
+		_costForm.Submit();
+	}
+	void OnCancel()
+	{
+		_visible = false;
+
+	}
+}
+
+

@@ -159,6 +159,9 @@
   <data name="Apparel" xml:space="preserve">
     <value>پوشاک</value>
   </data>
+  <data name="Bank" xml:space="preserve">
+    <value>بانک</value>
+  </data>
   <data name="BankAccount" xml:space="preserve">
     <value>حساب بانکی</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Campaigns" xml:space="preserve">
     <value>کارزارها</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>شماره کارت</value>
   </data>
   <data name="Cases" xml:space="preserve">
     <value>پرونده ها</value>
@@ -497,6 +503,9 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>تنظمیات</value>
+  </data>
+  <data name="Sheba" xml:space="preserve">
+    <value>شبا</value>
   </data>
   <data name="Shipping" xml:space="preserve">
     <value>حمل دریایی</value>

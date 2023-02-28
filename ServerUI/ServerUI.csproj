@@ -34,4 +34,16 @@
     <ProjectReference Include="..\ViewModels\ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\BankAccount\Components\BankAccountForm.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\BankAccount\Components\BankAccountGrid.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\BankAccount\BankAccount.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>

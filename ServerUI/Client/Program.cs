@@ -2,6 +2,7 @@ using Crm.FrontEnd.Blazor.Infrastructure;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using ServerUI;
+using ServerUI.Infrastructure;
 
 namespace ServerUI
 {
@@ -24,6 +25,16 @@ namespace ServerUI
 				// For more information, see https://aka.ms/blazor-standalone-auth
 				builder.Configuration.Bind("Local", options.ProviderOptions);
 			});
+
+			ServiceBootstrapper.Register(services);
+
+			services.AddSingleton
+				(current => new System.Net.Http.HttpClient
+				{
+					BaseAddress =
+						new System.Uri(builder.HostEnvironment.BaseAddress),
+				});
+
 
 			Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fa-IR");
 			Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("fa-IR");

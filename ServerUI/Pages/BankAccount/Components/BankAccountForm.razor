@@ -1,0 +1,74 @@
+﻿@using System.ComponentModel.DataAnnotations;
+@using System.Text.Json;
+@using System.ComponentModel
+@using ServerUI.Infrastructure.ResultModels;
+@using ServerUI.Pages.BankAccount.Services;
+@using ViewModels.BankAccount;
+@using ViewModels.Transactions;
+
+@inject BankAccountService service
+<Form @ref="form"
+	  Model="@model"
+	  OnFinish="OnFinish"
+	  OnFinishFailed="OnFinishFailed"
+	  Class="p-4">
+
+	<div class="row">
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.Name)" Class="p-2">
+				<Input Class="form-control" @bind-Value="@context.Name" />
+			</FormItem>
+		</div>
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.Bank)" Class="p-2">
+				<AutoComplete Options="@options">
+					<AutoCompleteInput TValue="string" Placeholder="input here" />
+				</AutoComplete>
+			</FormItem>
+		</div>
+	</div>
+
+
+	<div class="row">
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.CardNumber)" Class="p-2">
+				<Input Class="form-control" @bind-Value="@context.CardNumber" />
+			</FormItem>
+		</div>
+		<div class="col-md-6">
+			<FormItem Label="@(Resources.DataDictionary.Sheba)" Class="p-2">
+				<Input Class="form-control" @bind-Value="@context.Sheba" />
+			</FormItem>
+		</div>
+	</div>
+
+</Form>
+@code
+{
+	private Form<BankAccountCreateViewModel> form;
+	private BankAccountCreateViewModel model = new();
+
+	private string _transactionShamsiDate;
+
+	public void Submit()
+	{
+		if (form.Validate())
+		{
+			form.Submit();
+		}
+	}
+
+	List<string> options = new List<string>(){
+		"Beijing","Shanghai","Guangzhou","Shenzhen","Chongqing","Wuhan"
+	};
+
+	private async Task OnFinish(EditContext editContext)
+	{
+		await service.PostAsync<BankAccountCreateViewModel,Response>("create", model);
+	}
+
+	private void OnFinishFailed(EditContext editContext)
+	{
+		Console.WriteLine($"Failed:{JsonSerializer.Serialize(model)}");
+	}
+}

@@ -187,6 +187,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bank.
+        /// </summary>
+        public static string Bank {
+            get {
+                return ResourceManager.GetString("Bank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bank Account.
         /// </summary>
         public static string BankAccount {
@@ -219,6 +228,15 @@ namespace Resources {
         public static string Campaigns {
             get {
                 return ResourceManager.GetString("Campaigns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Card Number.
+        /// </summary>
+        public static string CardNumber {
+            get {
+                return ResourceManager.GetString("CardNumber", resourceCulture);
             }
         }
         
@@ -1191,6 +1209,15 @@ namespace Resources {
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sheba.
+        /// </summary>
+        public static string Sheba {
+            get {
+                return ResourceManager.GetString("Sheba", resourceCulture);
             }
         }
         

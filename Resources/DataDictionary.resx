@@ -159,6 +159,9 @@
   <data name="Apparel" xml:space="preserve">
     <value>Apparel</value>
   </data>
+  <data name="Bank" xml:space="preserve">
+    <value>Bank</value>
+  </data>
   <data name="BankAccount" xml:space="preserve">
     <value>Bank Account</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Campaigns" xml:space="preserve">
     <value>Campaigns</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Card Number</value>
   </data>
   <data name="Cases" xml:space="preserve">
     <value>Cases</value>
@@ -494,6 +500,9 @@
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Sheba" xml:space="preserve">
+    <value>Sheba</value>
   </data>
   <data name="Shipping" xml:space="preserve">
     <value>Shipping</value>

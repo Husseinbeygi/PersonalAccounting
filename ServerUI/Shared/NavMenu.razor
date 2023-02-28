@@ -43,7 +43,7 @@
 					<div class="col-6">
 						<Button Style="height:100px;width:100px" OnClick='(() => NavigateTo("cost"))' Type="@ButtonType.Dashed">@(string.Concat(Resources.DataDictionary.Add," ", Resources.DataDictionary.Cost))</Button>
 					</div>
-					<div class="col-6">
+						<div class="col-6">		
 							<Button Style="height:100px;width:100px" OnClick='(() => NavigateTo("income"))' Type="@ButtonType.Dashed">@(string.Concat(Resources.DataDictionary.Add, " ", Resources.DataDictionary.Income))</Button>
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 						<Button Style="height:100px;width:100px" Type="@ButtonType.Dashed">بانک ها</Button>
 					</div>
 					<div class="col-4">
-						<Button Style="height:100px;width:100px" Type="@ButtonType.Dashed">حساب ها</Button>
+							<Button Style="height:100px;width:100px" OnClick='(() => NavigateTo("bankaccount"))' Type="@ButtonType.Dashed">حساب ها</Button>
 					</div>
 					<div class="col-4">
 						<Button Style="height:100px;width:100px" Type="@ButtonType.Dashed">طرف حسابها</Button>
