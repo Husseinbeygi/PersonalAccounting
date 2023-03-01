@@ -4,9 +4,6 @@ using Server.Infrastructure;
 using ViewModels.BankAccount;
 
 namespace Server.Controllers;
-
-[Route("api/[controller]")]
-[ApiController]
 public class BankAccountController : BaseController
 	<BankAccount
 	, int

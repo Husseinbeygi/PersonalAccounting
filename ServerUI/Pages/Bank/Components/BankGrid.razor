@@ -1,0 +1,91 @@
+﻿@using ServerUI.Infrastructure.ResultModels;
+@using ServerUI.Pages.Bank.Services;
+@using ServerUI.Shared.Components
+@using ViewModels.BankAccount;
+@using ViewModels.Banks;
+@using ViewModels.Transactions;
+
+@inject BankService service
+
+<LoadingComponent Enabled="_isloading">
+	<Table TItem="BankViewModel"
+		   DataSource="banks"
+		   Total="banks.Count()"
+			   Responsive
+		   @bind-SelectedRows="SelectedRows">
+
+		<Selection Align="ColumnAlign.Center" Fixed="_checkboxFix" Key="@(context.Id.ToString())" />
+
+		<PropertyColumn Title="@(Resources.DataDictionary.Bank)" Align="columnAlign" Property="c=>c.Name" Sortable Filterable />
+	
+	</Table>
+</LoadingComponent>
+
+
+@code {
+	bool _isloading = false;
+	List<BankViewModel> banks = new();
+	IEnumerable<BankViewModel> selectedRows;
+	ColumnAlign columnAlign = ColumnAlign.Right;
+
+	[CascadingParameter]
+	public Bank Index { get; set; }
+
+	public IEnumerable<BankViewModel> SelectedRows
+	{
+		get
+		{
+			return selectedRows;
+		}
+		set
+		{
+			selectedRows = value;
+			Index.CheckforSelection();
+		}
+	}
+
+	protected async override Task OnInitializedAsync()
+	{
+
+		await base.OnInitializedAsync();
+
+		await FetchData();
+
+	}
+
+	public async Task FetchData()
+	{
+		_isloading = true;
+
+		var res = await service.GetAsync<ListResponse<BankViewModel>>("");
+		banks = res.data;
+
+		_isloading = false;
+	}
+
+
+	public async Task DeleteSelectedRows()
+	{
+		if (!selectedRows.Any())
+		{
+			return;
+		}
+
+		_isloading = true;
+
+		List<int> keys = new();
+
+		foreach (var item in selectedRows)
+		{
+			keys.Add(item.Id);
+		}
+
+		var res = await service.DeleteAsync<int, Response>("Delete", keys);
+
+			_isloading = false;
+
+
+	}
+
+
+}

@@ -6,8 +6,6 @@ using ViewModels.AccountSides;
 
 namespace Server.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
 public class AccountSideController : BaseController
 	<AccountSide
 	, int

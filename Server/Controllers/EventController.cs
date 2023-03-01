@@ -5,8 +5,6 @@ using Server.Infrastructure;
 using ViewModels.Events;
 
 namespace Server.Controllers;
-[Route("api/[controller]")]
-[ApiController]
 
 public class EventController : BaseController
 		<Event

@@ -6,7 +6,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Web;
 
-namespace Framework.HttpServices;
+namespace ServerUI.Services;
 
 
 public abstract class ServiceBase : object
@@ -57,19 +57,19 @@ public abstract class ServiceBase : object
 
 				return result;
 			}
-			catch (System.NotSupportedException ex)
+			catch (NotSupportedException ex)
 			{
 				string errorMessage =
 					$"Exception: {ex.Message} - The content type is not supported.";
 			}
-			catch (System.Text.Json.JsonException ex)
+			catch (JsonException ex)
 			{
 				string errorMessage =
 					$"Exception: {ex.Message} - Invalid JSON.";
 
 			}
 		}
-		catch (System.Net.Http.HttpRequestException ex)
+		catch (HttpRequestException ex)
 		{
 			string errorMessage =
 				$"Exception: {ex.Message}";
@@ -128,12 +128,12 @@ public abstract class ServiceBase : object
 
 				return result;
 			}
-			catch (System.NotSupportedException ex)
+			catch (NotSupportedException ex)
 			{
 				string errorMessage =
 					$"Exception: {ex.Message} - The content type is not supported.";
 			}
-			catch (System.Text.Json.JsonException ex)
+			catch (JsonException ex)
 			{
 				string errorMessage =
 					$"Exception: {ex.Message} - Invalid JSON.";
@@ -141,7 +141,7 @@ public abstract class ServiceBase : object
 			}
 
 		}
-		catch (System.Net.Http.HttpRequestException ex)
+		catch (HttpRequestException ex)
 		{
 			string errorMessage =
 				$"Exception: {ex.Message}";
@@ -196,12 +196,12 @@ public abstract class ServiceBase : object
 
 				return result;
 			}
-			catch (System.NotSupportedException ex)
+			catch (NotSupportedException ex)
 			{
 				string errorMessage =
 					$"Exception: {ex.Message} - The content type is not supported.";
 			}
-			catch (System.Text.Json.JsonException ex)
+			catch (JsonException ex)
 			{
 				string errorMessage =
 					$"Exception: {ex.Message} - Invalid JSON.";
@@ -209,7 +209,7 @@ public abstract class ServiceBase : object
 			}
 
 		}
-		catch (System.Net.Http.HttpRequestException ex)
+		catch (HttpRequestException ex)
 		{
 			string errorMessage =
 				$"Exception: {ex.Message}";
@@ -266,19 +266,19 @@ public abstract class ServiceBase : object
 
 				return result;
 			}
-			catch (System.NotSupportedException ex)
+			catch (NotSupportedException ex)
 			{
 				string errorMessage =
 					$"Exception: {ex.Message} - The content type is not supported.";
 			}
-			catch (System.Text.Json.JsonException ex)
+			catch (JsonException ex)
 			{
 				string errorMessage =
 					$"Exception: {ex.Message} - Invalid JSON.";
 
 			}
 		}
-		catch (System.Net.Http.HttpRequestException ex)
+		catch (HttpRequestException ex)
 		{
 			string errorMessage =
 				$"Exception: {ex.Message}";

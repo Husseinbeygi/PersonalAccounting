@@ -5,8 +5,6 @@ using ViewModels.Projects;
 
 namespace Server.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
 public class ProjectController : BaseController
 		<Project
 		, int

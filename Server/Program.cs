@@ -24,6 +24,19 @@ services.AddDbContext<DatabaseContext>
 	
 });
 
+var CorsPolices = "_cors";
+builder.Services.AddCors(options =>
+{
+	options.AddPolicy(name: CorsPolices,
+					  policy =>
+					  {
+						  policy.WithOrigins
+						  ("https://localhost:7241"
+						  ,"http://localhost:5122")
+							.AllowAnyHeader()
+							.AllowAnyMethod();
+					  });
+});
 
 var app = builder.Build();
 
@@ -34,6 +47,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(CorsPolices);
 
 app.UseAuthorization();
 

@@ -4,19 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 using Server.Infrastructure;
 using ViewModels.Category;
 
-namespace Server.Controllers
+namespace Server.Controllers;
+
+public class CategoryController : BaseController
+	<Category
+	, int
+	, CategoryViewModel
+	, CategoryCreateViewModel
+	, CategoryUpdateViewModel>
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class CategoryController : BaseController
-		<Category
-		, int
-		, CategoryViewModel
-		, CategoryCreateViewModel
-		, CategoryUpdateViewModel>
+	public CategoryController(ILogger<Category> logger, ICategoryRepository repository) : base(logger, repository)
 	{
-		public CategoryController(ILogger<Category> logger, ICategoryRepository repository) : base(logger, repository)
-		{
-		}
 	}
 }

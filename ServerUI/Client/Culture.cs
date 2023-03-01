@@ -2,7 +2,7 @@
 using Microsoft.JSInterop;
 using System.Globalization;
 
-namespace Crm.FrontEnd.Blazor.Infrastructure;
+namespace ServerUI.Client;
 
 public class Culture
 {
@@ -24,5 +24,5 @@ public class Culture
 
 		CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("fa-IR");
 		CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("fa-IR");
-    }
+	}
 }

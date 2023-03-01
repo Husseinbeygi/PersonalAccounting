@@ -1,10 +1,8 @@
-using Crm.FrontEnd.Blazor.Infrastructure;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using ServerUI;
 using ServerUI.Infrastructure;
 
-namespace ServerUI
+namespace ServerUI.Client
 {
 	public class Program
 	{
@@ -29,10 +27,10 @@ namespace ServerUI
 			ServiceBootstrapper.Register(services);
 
 			services.AddSingleton
-				(current => new System.Net.Http.HttpClient
+				(current => new HttpClient
 				{
 					BaseAddress =
-						new System.Uri(builder.HostEnvironment.BaseAddress),
+						new Uri("https://localhost:7289"),
 				});
 
 
@@ -41,11 +39,11 @@ namespace ServerUI
 
 			services.AddLocalization();
 
-            var host = builder.Build();
+			var host = builder.Build();
 
-            await Culture.SetUserCulture(host);
+			await Culture.SetUserCulture(host);
 
-            await host.RunAsync();
+			await host.RunAsync();
 		}
 	}
 }

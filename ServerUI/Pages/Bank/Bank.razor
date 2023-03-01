@@ -1,0 +1,59 @@
+﻿@page "/bank"
+@using ServerUI.Pages.Bank.Components
+@using ServerUI.Shared.Components.Apps
+<h3>Bank</h3>
+<div class="py-2" dir="ltr">
+	<Toolbar 
+		OnAddClick="OpenForm" 
+		OnRefreshClick="@(async () => await _bankGrid.FetchData())"
+		OnDeleteClick="@(async () => await _bankGrid.DeleteSelectedRows())"
+		canDelete="_canDelete" />
+</div>
+<div class="py-2">
+	<CascadingValue Value="this">
+
+		<BankGrid @ref="_bankGrid" />
+
+	</CascadingValue>
+</div>
+
+
+<Modal Title="Test"
+	   Visible="@(_visible)" 
+	   OnOk="@(OnSubmit)"
+	   OnCancel="@(OnCancel)"
+	   Width="800">
+
+
+	<BankForm @ref="_bankForm" />
+
+</Modal>
+
+@code {
+	BankForm _bankForm = new();
+	BankGrid _bankGrid = new();
+	bool _canDelete = false;
+	bool _visible = false;
+
+	public void CheckforSelection()
+	{
+		StateHasChanged();
+		_canDelete = _bankGrid.SelectedRows.Any();
+	}
+
+	void OpenForm()
+	{
+		_visible = true;
+	}
+	void OnSubmit()
+	{
+		_bankForm.Submit();
+	}
+	void OnCancel()
+	{
+		_visible = false;
+
+	}
+}
+
+

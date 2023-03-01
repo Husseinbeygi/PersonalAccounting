@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using ServerUI.Services;
 
-namespace ServerUI.Pages.BankAccount.Services
+namespace ServerUI.Pages.Bank.Services
 {
-	public class BankAccountService : ServiceBase
+	public class BankService : ServiceBase
 	{
 
-		public BankAccountService(HttpClient http,
+		public BankService(HttpClient http,
 			AuthenticationStateProvider authenticationStateProvider)
 			: base(http, authenticationStateProvider)
 		{
-			BaseUrl = "/api/v1/BankAccount";
+			BaseUrl = "/api/v1/Bank";
 		}
 	}
 }

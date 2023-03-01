@@ -6,8 +6,6 @@ using ViewModels.Banks;
 
 namespace Server.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
 public class BankController : BaseController
 	<Bank
 	, int

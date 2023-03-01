@@ -4,19 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 using Server.Infrastructure;
 using ViewModels.Transactions;
 
-namespace Server.Controllers
+namespace Server.Controllers;
+
+public class TransactionController : BaseController
+<Transaction
+, int
+, TransactionViewModel
+, TransactionCreateViewModel
+, TransactionUpdateViewModel>
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class TransactionController : BaseController
-	<Transaction
-	, int
-	, TransactionViewModel
-	, TransactionCreateViewModel
-	, TransactionUpdateViewModel>
+	public TransactionController(ILogger<Transaction> logger, ITransactionRepository repository) : base(logger, repository)
 	{
-		public TransactionController(ILogger<Transaction> logger, ITransactionRepository repository) : base(logger, repository)
-		{
-		}
 	}
 }

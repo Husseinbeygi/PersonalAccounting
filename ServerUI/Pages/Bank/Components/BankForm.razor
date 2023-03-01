@@ -1,0 +1,46 @@
+﻿@using System.ComponentModel.DataAnnotations;
+@using System.Text.Json;
+@using System.ComponentModel
+@using ServerUI.Infrastructure.ResultModels;
+@using ServerUI.Pages.Bank.Services;
+@using ServerUI.Pages.BankAccount.Services;
+@using ViewModels.BankAccount;
+@using ViewModels.Banks;
+@using ViewModels.Transactions;
+
+@inject BankService service
+
+<Form @ref="form"
+	  Model="@model"
+	  OnFinish="OnFinish"
+	  OnFinishFailed="OnFinishFailed"
+	  Class="p-4">
+
+	<FormItem Label="@(Resources.DataDictionary.Name)" Class="p-2">
+		<Input Class="form-control" @bind-Value="@context.Name" />
+	</FormItem>
+
+</Form>
+@code
+{
+	private Form<BankCreateViewModel> form;
+	private BankCreateViewModel model = new();
+
+	public void Submit()
+	{
+		if (form.Validate())
+		{
+			form.Submit();
+		}
+	}
+
+	private async Task OnFinish(EditContext editContext)
+	{
+		await service.PostAsync<BankCreateViewModel,Response>("create", model);
+	}
+
+	private void OnFinishFailed(EditContext editContext)
+	{
+		Console.WriteLine($"Failed:{JsonSerializer.Serialize(model)}");
+	}
+}

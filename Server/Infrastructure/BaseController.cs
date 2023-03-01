@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Infrastructure;
 
+[Route("api/v1/[controller]")]
+[ApiController]
 public class BaseController<TEntity, TKey, TViewModel, TCreateModel, TUpdateModel> : ControllerBase where TEntity : class, IEntity<TKey>
 {
 	public BaseController(ILogger logger,
@@ -17,7 +19,7 @@ public class BaseController<TEntity, TKey, TViewModel, TCreateModel, TUpdateMode
 	public ILogger Logger { get; }
 	public IRepository<TEntity, TKey> Repository { get; }
 
-	[HttpGet("GetAll")]
+	[HttpGet]
 	public async Task<IActionResult> GetAll()
 	{
 		var entities = (await Repository.GetAllAsync()).ToList();
@@ -97,17 +99,34 @@ public class BaseController<TEntity, TKey, TViewModel, TCreateModel, TUpdateMode
 
 
 	[HttpDelete("Delete")]
-	public async Task<IActionResult> Delete(TKey id)
+	public async Task<IActionResult> Delete(List<TKey> ids)
 	{
-
-		var result = await Repository.RemoveByIdAsync(id);
-
-		if (result)
+		var Deleteresult = new List<bool>();
+		var resultForResponse = new Result<bool>();
+		foreach (var id in ids)
 		{
-			return Ok();
+
+			var res = await Repository.RemoveByIdAsync(id);
+			Deleteresult.Add(res);
 		}
 
-		return BadRequest();
+		if (Deleteresult.Contains(false) == false)
+		{
+			resultForResponse.SetStatusSucceeded();
+			return Ok(resultForResponse);
+		}
+		else if (Deleteresult.Contains(true) == false)
+		{
+			resultForResponse.SetStatusFailed();
+			return Ok(resultForResponse);
+
+		}
+		else
+		{
+			resultForResponse.SetStatusPartiallySucceeded();
+			return Ok(resultForResponse);
+
+		}
 	}
 
 }
