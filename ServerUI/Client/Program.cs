@@ -1,3 +1,4 @@
+using Framework.Toasts;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using ServerUI.Infrastructure;
@@ -38,6 +39,8 @@ namespace ServerUI.Client
 			Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("fa-IR");
 
 			services.AddLocalization();
+
+			services.AddScoped<ToastMessage>();
 
 			var host = builder.Build();
 

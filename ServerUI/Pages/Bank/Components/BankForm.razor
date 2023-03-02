@@ -1,6 +1,7 @@
 ﻿@using System.ComponentModel.DataAnnotations;
 @using System.Text.Json;
 @using System.ComponentModel
+@using Framework.Toasts;
 @using ServerUI.Infrastructure.ResultModels;
 @using ServerUI.Pages.Bank.Services;
 @using ServerUI.Pages.BankAccount.Services;
@@ -9,11 +10,13 @@
 @using ViewModels.Transactions;
 
 @inject BankService service
+@inject ToastMessage _message;
 
 <Form @ref="form"
 	  Model="@model"
 	  OnFinish="OnFinish"
 	  OnFinishFailed="OnFinishFailed"
+	  On
 	  Class="p-4">
 
 	<FormItem Label="@(Resources.DataDictionary.Name)" Class="p-2">
@@ -23,8 +26,12 @@
 </Form>
 @code
 {
-	private Form<BankCreateViewModel> form;
+	private Form<BankCreateViewModel> form = new();
 	private BankCreateViewModel model = new();
+
+
+	[CascadingParameter]
+	public Bank Index { get; set; }
 
 	public void Submit()
 	{
@@ -36,7 +43,14 @@
 
 	private async Task OnFinish(EditContext editContext)
 	{
-		await service.PostAsync<BankCreateViewModel,Response>("create", model);
+		var res = await service.PostAsync<BankCreateViewModel,Response>("create", model);
+
+		Index.CloseForm();
+
+		await _message.Show(res);
+
+		await Index.Fetchdata();
+
 	}
 
 	private void OnFinishFailed(EditContext editContext)

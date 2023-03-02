@@ -123,6 +123,9 @@
   <data name="Deleted" xml:space="preserve">
     <value>{0} با موفقیت حذف گردید.</value>
   </data>
+  <data name="Success" xml:space="preserve">
+    <value>عملیات با موفقیت انجام شد</value>
+  </data>
   <data name="Updated" xml:space="preserve">
     <value>{0} با موفقیت ویرایش گردید.</value>
   </data>

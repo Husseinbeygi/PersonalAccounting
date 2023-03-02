@@ -17,7 +17,7 @@
 		<Selection Align="ColumnAlign.Center" Fixed="_checkboxFix" Key="@(context.Id.ToString())" />
 
 		<PropertyColumn Title="@(Resources.DataDictionary.Bank)" Align="columnAlign" Property="c=>c.Name" Sortable Filterable />
-	
+
 	</Table>
 </LoadingComponent>
 
@@ -82,7 +82,10 @@
 
 		var res = await service.DeleteAsync<int, Response>("Delete", keys);
 
-			_isloading = false;
+
+		await Index.Fetchdata();
+
+		_isloading = false;
 
 
 	}

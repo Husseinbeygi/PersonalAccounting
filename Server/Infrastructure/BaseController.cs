@@ -99,7 +99,7 @@ public class BaseController<TEntity, TKey, TViewModel, TCreateModel, TUpdateMode
 
 
 	[HttpDelete("Delete")]
-	public async Task<IActionResult> Delete(List<TKey> ids)
+	public async Task<IActionResult> Delete([FromQuery] List<TKey> ids)
 	{
 		var Deleteresult = new List<bool>();
 		var resultForResponse = new Result<bool>();
@@ -107,6 +107,9 @@ public class BaseController<TEntity, TKey, TViewModel, TCreateModel, TUpdateMode
 		{
 
 			var res = await Repository.RemoveByIdAsync(id);
+
+			await Repository.SaveChangesAsync();
+
 			Deleteresult.Add(res);
 		}
 

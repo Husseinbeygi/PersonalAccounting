@@ -24,8 +24,9 @@
 	   OnCancel="@(OnCancel)"
 	   Width="800">
 
-
-	<BankForm @ref="_bankForm" />
+	<CascadingValue Value="this">
+		<BankForm @ref="_bankForm" />
+	</CascadingValue>
 
 </Modal>
 
@@ -41,10 +42,23 @@
 		_canDelete = _bankGrid.SelectedRows.Any();
 	}
 
-	void OpenForm()
+	public void OpenForm()
 	{
+		StateHasChanged();
 		_visible = true;
 	}
+
+	public void CloseForm()
+	{
+		StateHasChanged();
+		_visible = false;
+	}
+
+	public async Task Fetchdata()
+	{
+		await _bankGrid.FetchData();
+	}
+
 	void OnSubmit()
 	{
 		_bankForm.Submit();
