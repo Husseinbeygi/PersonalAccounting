@@ -168,6 +168,9 @@
   <data name="Banking" xml:space="preserve">
     <value>Banking</value>
   </data>
+  <data name="Banks" xml:space="preserve">
+    <value>Banks</value>
+  </data>
   <data name="Biotechnology" xml:space="preserve">
     <value>Biotechnology</value>
   </data>
@@ -488,6 +491,9 @@
   </data>
   <data name="Retail" xml:space="preserve">
     <value>Retail</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>Row</value>
   </data>
   <data name="Salutation" xml:space="preserve">
     <value>Salutation</value>

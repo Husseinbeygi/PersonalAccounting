@@ -168,6 +168,9 @@
   <data name="Banking" xml:space="preserve">
     <value>بانکداری</value>
   </data>
+  <data name="Banks" xml:space="preserve">
+    <value>بانک ها</value>
+  </data>
   <data name="Biotechnology" xml:space="preserve">
     <value>بیوتکنولوژی</value>
   </data>
@@ -491,6 +494,9 @@
   </data>
   <data name="Retail" xml:space="preserve">
     <value>خرده فروشی</value>
+  </data>
+  <data name="Row" xml:space="preserve">
+    <value>ردیف</value>
   </data>
   <data name="Salutation" xml:space="preserve">
     <value>خطاب</value>

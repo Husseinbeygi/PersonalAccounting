@@ -16,7 +16,7 @@
 	  Model="@model"
 	  OnFinish="OnFinish"
 	  OnFinishFailed="OnFinishFailed"
-	  On
+	  Loading="_loading"
 	  Class="p-4">
 
 	<FormItem Label="@(Resources.DataDictionary.Name)" Class="p-2">
@@ -26,9 +26,9 @@
 </Form>
 @code
 {
-	private Form<BankCreateViewModel> form = new();
-	private BankCreateViewModel model = new();
-
+	private Form<BankViewModel> form = new();
+	public BankViewModel model = new();
+	private bool _loading = false;
 
 	[CascadingParameter]
 	public Bank Index { get; set; }
@@ -37,19 +37,15 @@
 	{
 		if (form.Validate())
 		{
+			_loading = true;
 			form.Submit();
+			_loading = false;
 		}
 	}
 
 	private async Task OnFinish(EditContext editContext)
 	{
-		var res = await service.PostAsync<BankCreateViewModel,Response>("create", model);
 
-		Index.CloseForm();
-
-		await _message.Show(res);
-
-		await Index.Fetchdata();
 
 	}
 

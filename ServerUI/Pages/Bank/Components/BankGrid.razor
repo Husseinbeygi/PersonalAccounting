@@ -1,4 +1,5 @@
-﻿@using ServerUI.Infrastructure.ResultModels;
+﻿@using AntDesign.TableModels;
+@using ServerUI.Infrastructure.ResultModels;
 @using ServerUI.Pages.Bank.Services;
 @using ServerUI.Shared.Components
 @using ViewModels.BankAccount;
@@ -7,19 +8,29 @@
 
 @inject BankService service
 
-<LoadingComponent Enabled="_isloading">
-	<Table TItem="BankViewModel"
-		   DataSource="banks"
-		   Total="banks.Count()"
-			   Responsive
-		   @bind-SelectedRows="SelectedRows">
+<Table TItem="BankViewModel"
+	   DataSource="banks"
+	   Total="banks.Count()"
+	   Loading="_isloading"
+	   Responsive="true"
+	   @bind-SelectedRows="SelectedRows">
 
-		<Selection Align="ColumnAlign.Center" Fixed="_checkboxFix" Key="@(context.Id.ToString())" />
+	<Selection Align="ColumnAlign.Center" Fixed="_checkboxFix" Key="@(context.Id.ToString())" />
+	<ActionColumn Class="text-center" Width="100px" Title="@(Resources.DataDictionary.Row)">
+		<Space>
+			<SpaceItem>
+				<Button OnClick="(() => GotoEdit(context.Id))"
+						Shape="@ButtonShape.Circle"
+						Type="@ButtonType.Text"
+						Style="background-color:#fafafafa">
+					@(context.Row_Number)
+				</Button>
+			</SpaceItem>
+		</Space>
+	</ActionColumn>
+	<PropertyColumn Title="@(Resources.DataDictionary.Bank)" Align="columnAlign" Property="c=>c.Name" Sortable Filterable />
 
-		<PropertyColumn Title="@(Resources.DataDictionary.Bank)" Align="columnAlign" Property="c=>c.Name" Sortable Filterable />
-
-	</Table>
-</LoadingComponent>
+</Table>
 
 
 @code {
@@ -58,11 +69,27 @@
 		_isloading = true;
 
 		var res = await service.GetAsync<ListResponse<BankViewModel>>("");
+		int _lastnumber = 1;
+		foreach (var item in res.data)
+		{
+			item.Row_Number = _lastnumber++;
+		}
+
 		banks = res.data;
 
 		_isloading = false;
 	}
 
+	public async Task GotoEdit(int Id)
+	{
+			_isloading = true;
+
+			var res = await service.GetAsync<Response<BankViewModel>>(Id.ToString());
+
+			Index.OpenEditForm(res.data);
+
+			_isloading = false;
+	}
 
 	public async Task DeleteSelectedRows()
 	{

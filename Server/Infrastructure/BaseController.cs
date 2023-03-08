@@ -31,7 +31,7 @@ public class BaseController<TEntity, TKey, TViewModel, TCreateModel, TUpdateMode
 		return Ok(result);
 	}
 
-	[HttpGet("Get/{id}")]
+	[HttpGet("{id}")]
 	public async Task<IActionResult> GetAll(TKey id)
 	{
 		var entities = await Repository.GetByIdAsync(id);
