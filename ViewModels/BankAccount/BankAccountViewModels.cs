@@ -8,7 +8,8 @@ public record BankAccountViewModel
 
 
 	public int Id { get; set; }
-	public string Name { get; set; }
+    public int Row_Number { get; set; }
+    public string Name { get; set; }
 	public string? AccountNumber { get; set; }
 	public string? Sheba { get; set; }
 	public string? CardNumber { get; set; }

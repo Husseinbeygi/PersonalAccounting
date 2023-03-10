@@ -205,6 +205,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BankAccounts.
+        /// </summary>
+        public static string BankAccounts {
+            get {
+                return ResourceManager.GetString("BankAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Banking.
         /// </summary>
         public static string Banking {

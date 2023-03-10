@@ -1,53 +1,112 @@
-﻿@using ServerUI.Shared.Components
+﻿@using ServerUI.Infrastructure.ResultModels;
+@using ServerUI.Pages.BankAccount.Services;
+@using ServerUI.Shared.Components
 @using ViewModels.BankAccount;
 @using ViewModels.Transactions;
 
-<LoadingComponent Enabled="_isloading">
-	<Table TItem="BankAccountViewModel"
-		   DataSource="Transactions"
-		   Total="Transactions.Count()"
-			   Responsive
-		   @bind-SelectedRows="SelectedRows">
+@inject BankAccountService service
 
-		<Selection Align="ColumnAlign.Center" Fixed="_checkboxFix" Key="@(context.Id.ToString())" />
-		@*		<ActionColumn Title="#">
+<Table TItem="BankAccountViewModel"
+	   DataSource="bankAccounts"
+	   Total="bankAccounts.Count()"
+	   Loading="_isloading"
+	   Responsive
+	   @bind-SelectedRows="SelectedRows">
+
+	<Selection Align="ColumnAlign.Center" Fixed="_checkboxFix" Key="@(context.Id.ToString())" />
+	<ActionColumn Class="text-center" Width="100px" Title="@(Resources.DataDictionary.Row)">
 		<Space>
-		<SpaceItem>
-		<Button OnClick="(() => GotoEdit(context.Id))"
-		Shape="@ButtonShape.Circle"
-		Type="@ButtonType.Text"
-		Style="background-color:#fafafafa">
-		@(context.Code)
-		</Button>
-		</SpaceItem>
+			<SpaceItem>
+				<Button OnClick="(() => GotoEdit(context.Id))"
+						Shape="@ButtonShape.Circle"
+						Type="@ButtonType.Text"
+						Style="background-color:#fafafafa">
+					@(context.Row_Number)
+				</Button>
+			</SpaceItem>
 		</Space>
-		</ActionColumn>
-		*@
-		<PropertyColumn Title="@(Resources.DataDictionary.BankAccount)" Align="columnAlign" Property="c=>c.Name" Sortable Filterable />
-		<PropertyColumn Title="@(Resources.DataDictionary.Bank)" Align="columnAlign" Property="c=>c.BankName" Sortable Filterable />
-		<PropertyColumn Title="@(Resources.DataDictionary.CardNumber)" Align="columnAlign" Property="c=>c.CardNumber" Sortable Filterable />
-		<PropertyColumn Title="@(Resources.DataDictionary.Sheba)" Align="columnAlign" Property="c=>c.Sheba" Sortable Filterable />
+	</ActionColumn>
+	<PropertyColumn Title="@(Resources.DataDictionary.BankAccount)" Align="columnAlign" Property="c=>c.Name" Sortable Filterable />
+	<PropertyColumn Title="@(Resources.DataDictionary.Bank)" Align="columnAlign" Property="c=>c.BankName" Sortable Filterable />
+	<PropertyColumn Title="@(Resources.DataDictionary.CardNumber)" Align="columnAlign" Property="c=>c.CardNumber" Sortable Filterable />
+	<PropertyColumn Title="@(Resources.DataDictionary.Sheba)" Align="columnAlign" Property="c=>c.Sheba" Sortable Filterable />
 
-	</Table>
-</LoadingComponent>
+</Table>
 
 
 @code {
 	bool _isloading = false;
-	List<BankAccountViewModel> Transactions = new();
+	List<BankAccountViewModel> bankAccounts = new();
 	IEnumerable<BankAccountViewModel> selectedRows;
-	public IEnumerable<BankAccountViewModel> SelectedRows
-	{
-		get
-		{
+	ColumnAlign columnAlign = ColumnAlign.Right;
+
+	[CascadingParameter]
+	public BankAccount Index { get; set; }
+
+	public IEnumerable<BankAccountViewModel> SelectedRows {
+		get {
 			return selectedRows;
 		}
-		set
-		{
+		set {
 			selectedRows = value;
-			//Index.CheckforSelection();
+			Index.CheckforSelection();
 		}
 	}
-	ColumnAlign columnAlign = ColumnAlign.Right;
+
+	protected async override Task OnInitializedAsync() {
+
+		await base.OnInitializedAsync();
+
+		await FetchData();
+
+	}
+
+	public async Task FetchData() {
+		_isloading = true;
+
+		var res = await service.GetAsync<ListResponse<BankAccountViewModel>>("");
+		int _lastnumber = 1;
+		foreach (var item in res.data) {
+			item.Row_Number = _lastnumber++;
+		}
+
+		bankAccounts = res.data;
+
+		_isloading = false;
+	}
+
+	public async Task GotoEdit(int Id) {
+		_isloading = true;
+
+		var res = await service.GetAsync<Response<BankAccountViewModel>>(Id.ToString());
+
+		Index.OpenEditForm(res.data);
+
+		_isloading = false;
+	}
+
+	public async Task DeleteSelectedRows() {
+		if (!selectedRows.Any()) {
+			return;
+		}
+
+		_isloading = true;
+
+		List<int> keys = new();
+
+		foreach (var item in selectedRows) {
+			keys.Add(item.Id);
+		}
+
+		var res = await service.DeleteAsync<int, Response>("Delete", keys);
+
+
+		await Index.Fetchdata();
+
+		_isloading = false;
+
+
+	}
+
 
 }

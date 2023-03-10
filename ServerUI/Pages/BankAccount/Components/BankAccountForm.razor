@@ -2,15 +2,21 @@
 @using System.Text.Json;
 @using System.ComponentModel
 @using ServerUI.Infrastructure.ResultModels;
+@using ServerUI.Infrastructure;
+@using ServerUI.Pages.Bank.Services;
 @using ServerUI.Pages.BankAccount.Services;
 @using ViewModels.BankAccount;
+@using ViewModels.Banks;
 @using ViewModels.Transactions;
 
-@inject BankAccountService service
+@inject BankAccountService service;
+@inject BankService _bankService;
+
 <Form @ref="form"
 	  Model="@model"
 	  OnFinish="OnFinish"
 	  OnFinishFailed="OnFinishFailed"
+	  Loading="_loading"
 	  Class="p-4">
 
 	<div class="row">
@@ -21,8 +27,11 @@
 		</div>
 		<div class="col-md-6">
 			<FormItem Label="@(Resources.DataDictionary.Bank)" Class="p-2">
-				<AutoComplete Options="@options">
-					<AutoCompleteInput TValue="string" Placeholder="input here" />
+				<AutoComplete Options="@bankoptions" OnSelectionChange="OnSelectionChange">
+					<OptionTemplate Context="bankoption">
+						<AutoCompleteOption Value="@bankoption.Value" Label="@bankoption.Label">
+						</AutoCompleteOption>
+					</OptionTemplate>
 				</AutoComplete>
 			</FormItem>
 		</div>
@@ -43,28 +52,49 @@
 	</div>
 
 </Form>
+
 @code
 {
-	private Form<BankAccountCreateViewModel> form;
-	private BankAccountCreateViewModel model = new();
+	private Form<BankAccountViewModel> form;
+	public BankAccountViewModel model = new();
+	private bool _loading = false;
+	List<AutoCompleteOption> bankoptions = new();
+	private AutoCompleteOption selectItem;
 
 	private string _transactionShamsiDate;
+
+	[CascadingParameter]
+	public BankAccount Index { get; set; }
+
+	protected async override Task OnInitializedAsync() 
+	{
+		var res = await _bankService.GetAsync<ListResponse<BankViewModel>>("");
+		foreach (var item in res.data) {
+			bankoptions.Add(new AutoCompleteOption { Value = item.Id, Label = item.Name });
+			Console.WriteLine(item);
+		}
+
+		await base.OnInitializedAsync();
+	}
 
 	public void Submit()
 	{
 		if (form.Validate())
 		{
+			_loading = true;
 			form.Submit();
+			_loading = false;
 		}
 	}
 
-	List<string> options = new List<string>(){
-		"Beijing","Shanghai","Guangzhou","Shenzhen","Chongqing","Wuhan"
-	};
+	void OnSelectionChange(AutoCompleteOption item) {
+		selectItem = item;
+		Console.WriteLine(item);
+	}
 
 	private async Task OnFinish(EditContext editContext)
 	{
-		await service.PostAsync<BankAccountCreateViewModel,Response>("create", model);
+		//await service.PostAsync<BankAccountCreateViewModel,Response>("create", model);
 	}
 
 	private void OnFinishFailed(EditContext editContext)

@@ -5,11 +5,11 @@
 @using ServerUI.Pages.Bank.Services;
 @using ServerUI.Shared.Components.Apps
 @using ViewModels.Banks;
-<h3>@(Resources.DataDictionary.Banks)</h3>
-
 
 @inject BankService service
 @inject ToastMessage _message;
+
+<h3>@(Resources.DataDictionary.Banks)</h3>
 
 <div class="py-2" dir="ltr">
 	<Toolbar 
@@ -18,6 +18,7 @@
 		OnDeleteClick="@(async () => await _bankGrid.DeleteSelectedRows())"
 		canDelete="_canDelete" />
 </div>
+
 <div class="py-2">
 	<CascadingValue Value="this">
 
@@ -26,10 +27,12 @@
 	</CascadingValue>
 </div>
 
+<Modal Title="@(_formMode == 1
+        ? string.Concat(Resources.DataDictionary.Add," ",Resources.DataDictionary.Bank)
+        : string.Concat(Resources.DataDictionary.Edit," ",Resources.DataDictionary.Bank))"
 
-<Modal Title="Test"
-	   Visible="@(ShowModal)" 
-	   OnOk="@(OnSubmit)"
+       Visible="@(ShowModal)"
+       OnOk="@(OnSubmit)"
 	   OnCancel="@(OnCancel)"
 	   Width="800">
 

@@ -165,6 +165,9 @@
   <data name="BankAccount" xml:space="preserve">
     <value>حساب بانکی</value>
   </data>
+  <data name="BankAccounts" xml:space="preserve">
+    <value>حسابهای بانکی</value>
+  </data>
   <data name="Banking" xml:space="preserve">
     <value>بانکداری</value>
   </data>

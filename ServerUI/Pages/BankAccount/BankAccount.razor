@@ -1,43 +1,93 @@
 ﻿@page "/bankaccount"
+@using Framework.Toasts;
+@using ServerUI.Infrastructure.ResultModels;
+@using ServerUI.Pages.BankAccount.Services;
 @using ServerUI.Shared.Components.Apps
 @using ServerUI.Pages.BankAccount.Components
-<h3>BankAccount</h3>
+@using ViewModels.BankAccount;
+
+@inject BankAccountService service
+@inject ToastMessage _message;
+
+<h3>@(Resources.DataDictionary.BankAccounts)</h3>
+
 <div class="py-2" dir="ltr">
-	<Toolbar OnAddClick="OpenForm"/>
+    <Toolbar OnAddClick="OpenNewForm"
+             OnRefreshClick="@(async () => await _bankAccountGrid.FetchData())"
+             OnDeleteClick="@(async () => await _bankAccountGrid.DeleteSelectedRows())"
+             canDelete="_canDelete" />
 </div>
+
 <div class="py-2">
-	<BankAccountGrid />
+    <CascadingValue Value="this">
+
+	    <BankAccountGrid />
+
+    </CascadingValue>
 </div>
 
+<Modal Title="@(_formMode == 1 
+        ? string.Concat(Resources.DataDictionary.Add," ",Resources.DataDictionary.BankAccount) 
+        : string.Concat(Resources.DataDictionary.Edit," ",Resources.DataDictionary.BankAccount))"
 
-<Modal Title="Test"
-	   Visible="@(_visible)" 
-	   OnOk="@(OnSubmit)"
+       Visible="@(ShowModal)"
+       OnOk="@(OnSubmit)"
 	   OnCancel="@(OnCancel)"
 	   Width="800">
+	<CascadingValue Value="this">
 
+    <BankAccountForm @ref="_bankAccountForm" />
 
-	<BankAccountForm @ref="_costForm" />
-
+    </CascadingValue>
 </Modal>
 
 @code {
-	BankAccountForm _costForm = new();
-	bool _visible = false;
+    BankAccountForm _bankAccountForm = new();
+    BankAccountGrid _bankAccountGrid = new();
+    bool _canDelete = false;
+    public bool ShowModal = false;
+    public byte _formMode = 0;
 
-	void OpenForm()
-	{
-		_visible = true;
-	}
-	void OnSubmit()
-	{
-		_costForm.Submit();
-	}
-	void OnCancel()
-	{
-		_visible = false;
+    public void CheckforSelection() {
+        _canDelete = _bankAccountGrid.SelectedRows.Any();
+        StateHasChanged();
+    }
 
-	}
+    public void OpenNewForm() {
+        _bankAccountForm.model = new BankAccountViewModel();
+        ShowModal = true;
+        _formMode = 1;
+    }
+
+    public void OpenEditForm(BankAccountViewModel model) {
+        _bankAccountForm.model = model;
+        ShowModal = true;
+        _formMode = 2;
+        StateHasChanged();
+    }
+
+    public async Task Fetchdata() {
+        await _bankAccountGrid.FetchData();
+    }
+
+    async Task OnSubmit() {
+        var res = new Response();
+        if (_formMode == 1) {
+            res = await service.PostAsync<BankAccountViewModel, Response>("create", _bankAccountForm.model);
+        }
+        else if (_formMode == 2) {
+            res = await service.PatchAsync<BankAccountViewModel, Response>("update", _bankAccountForm.model);
+        }
+
+        ShowModal = false;
+
+        Task.Run(async () => await _message.Show(res));
+
+        await Fetchdata();
+    }
+
+    void OnCancel() {
+        ShowModal = false;
+
+    }
 }
-
-
